@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lulu Suka Sigit 💖</title>
+<style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #ff9a9e, #fecfef);
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        position: relative;
+    }
+
+    h1 {
+        font-size: 2.8em;
+        margin-bottom: 10px;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+        text-shadow: 0 0 15px #ff6b81;
+    }
+
+    p {
+        font-size: 1.3em;
+        margin-bottom: 30px;
+        opacity: 0;
+        animation: fadeIn 2s forwards 0.5s;
+        text-shadow: 0 0 10px #fff;
+    }
+
+    button {
+        padding: 15px 35px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        background-color: #ff6b81;
+        color: #fff;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    button:hover {
+        background-color: #ff4757;
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .heart, .confetti {
+        position: absolute;
+        pointer-events: none;
+        font-size: 2em;
+        animation: floatUp 2s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+        0% {transform: translateY(0) scale(1); opacity:1;}
+        100% {transform: translateY(-150px) scale(0.5); opacity:0;}
+    }
+
+    @keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+
+    #message {
+        font-size: 1.8em;
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 2s;
+        text-shadow: 0 0 15px #ff6b81;
+    }
+</style>
+</head>
+<body>
+    <h1>Hai زكية اللولو 💖</h1>
+    <p>Ini bukti cinta Lulu ke Sigit! 🌹</p>
+    <button id="buktikanBtn">Buktikan! 💕</button>
+    <div id="message"></div>
+
+    <audio id="loveSound" src="https://www.soundjay.com/button/sounds/button-16.mp3" preload="auto"></audio>
+
+    <script>
+        const buktikanBtn = document.getElementById('buktikanBtn');
+        const message = document.getElementById('message');
+        const sound = document.getElementById('loveSound');
+
+        buktikanBtn.addEventListener('click', () => {
+            sound.play();
+            message.innerText = "🌹 زكية اللولو berkata YA! Sigit dicintainya! 💕";
+            message.style.opacity = 1;
+
+            for(let i=0; i<30; i++) setTimeout(createHeart, i*100);
+            for(let i=0; i<30; i++) setTimeout(createConfetti, i*100);
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random()*window.innerWidth + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            heart.style.fontSize = (Math.random()*30+20)+'px';
+            heart.innerText = '❤️';
+            document.body.appendChild(heart);
+            setTimeout(()=>heart.remove(), 2000);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random()*window.innerWidth + 'px';
+            confetti.style.top = window.innerHeight + 'px';
+            confetti.style.fontSize = (Math.random()*25+15)+'px';
+            const emojis = ['💖','💘','💝','💗','💞'];
+            confetti.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+            document.body.appendChild(confetti);
+            setTimeout(()=>confetti.remove(), 2000);
+        }
+
+        function followHeart(x, y){
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            heart.style.fontSize = (Math.random()*25+20)+'px';
+            heart.innerText = '❤️';
+            document.body.appendChild(heart);
+            setTimeout(()=>heart.remove(), 1500);
+        }
+
+        document.addEventListener('mousemove', e => followHeart(e.clientX, e.clientY));
+        document.addEventListener('touchmove', e => {
+            for(let t of e.touches) followHeart(t.clientX, t.clientY);
+        });
+    </script>
+</body>
+</html>
