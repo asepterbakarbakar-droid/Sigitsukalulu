@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lulu Suka Sigit 💖</title>
+
+<body>
+    <h1>Hai زكية اللولو 💖</h1>
+    <p>Ini bukti cinta Lulu ke Sigit! 🌹</p>
+    <button id="buktikanBtn">Buktikan! 💕</button>
+    <div id="message"></div>
+
+    <audio id="loveSound" src="https://www.soundjay.com/button/sounds/button-16.mp3" preload="auto"></audio>
+
+    <script>
+        const buktikanBtn = document.getElementById('buktikanBtn');
+        const message = document.getElementById('message');
+        const sound = document.getElementById('loveSound');
+
+        buktikanBtn.addEventListener('click', () => {
+            sound.play();
+            message.innerText = "🌹 زكية اللولو berkata YA! Sigit dicintainya! 💕";
+            message.style.opacity = 1;
+
+            for(let i=0; i<30; i++) setTimeout(createHeart, i*100);
+            for(let i=0; i<30; i++) setTimeout(createConfetti, i*100);
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random()*window.innerWidth + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            heart.style.fontSize = (Math.random()*30+20)+'px';
+            heart.innerText = '❤️';
+            document.body.appendChild(heart);
+            setTimeout(()=>heart.remove(), 2000);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random()*window.innerWidth + 'px';
+            confetti.style.top = window.innerHeight + 'px';
+            confetti.style.fontSize = (Math.random()*25+15)+'px';
+            const emojis = ['💖','💘','💝','💗','💞'];
+            confetti.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+            document.body.appendChild(confetti);
+            setTimeout(()=>confetti.remove(), 2000);
+        }
+
+        function followHeart(x, y){
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            heart.style.fontSize = (Math.random()*25+20)+'px';
+            heart.innerText = '❤️';
+            document.body.appendChild(heart);
+            setTimeout(()=>heart.remove(), 1500);
+        }
+
+        document.addEventListener('mousemove', e => followHeart(e.clientX, e.clientY));
+        document.addEventListener('touchmove', e => {
+            for(let t of e.touches) followHeart(t.clientX, t.clientY);
+        });
+    </script>
+</body>
+</html>
